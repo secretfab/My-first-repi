@@ -1,0 +1,31 @@
+name: CI Test Workflow
+
+# Déclenche l'action sur un push ou une pull request vers la branche principale
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupère le code source du dépôt
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      # 2. Exemple d'installation de Node.js (adaptez selon votre langage)
+      - name: Configuration de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Installation des dépendances
+      - name: Installer les dépendances
+        run: npm install
+
+      # 4. Lancement des tests
+      - name: Exécuter les tests
+        run: npm test
